@@ -4,15 +4,24 @@
 <meta charset="UTF-8">
 <title>D-Day Widget</title>
 </head>
-<body style="margin:0;">
 
-<div id="container" style="display:inline-block; padding:20px;">
-    <div id="dday" style="font-size:24px; font-weight:bold;"></div>
+<body style="margin:0; padding:0;">
+
+<div id="container" style="text-align:center; padding:20px; transition:0.3s;">
+
+  <div id="dday" style="font-size:24px; font-weight:bold; margin-bottom:10px;"></div>
+
+  <div>
+    <button onclick="resizeBox(120)">작게</button>
+    <button onclick="resizeBox(200)">보통</button>
+    <button onclick="resizeBox(300)">크게</button>
+  </div>
+
 </div>
 
 <script>
-// ===== D-day 계산 =====
 const targetDate = new Date("2026-12-31"); // 날짜 수정
+
 const today = new Date();
 today.setHours(0,0,0,0);
 
@@ -31,16 +40,9 @@ if (diffDays > 0) {
 
 document.getElementById("dday").innerText = result;
 
-
-// ===== 높이 자동 맞춤 =====
-function sendHeight() {
-    const height = document.body.scrollHeight;
-    window.parent.postMessage({ frameHeight: height }, "*");
+function resizeBox(height) {
+    document.getElementById("container").style.height = height + "px";
 }
-
-window.onload = sendHeight;
-window.onresize = sendHeight;
-setInterval(sendHeight, 500); // 지속적으로 갱신
 </script>
 
 </body>
